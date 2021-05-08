@@ -2,6 +2,7 @@ package com.chronometer
 
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.View
 import android.widget.Chronometer
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var chronometer: Chronometer
     private var pauseOffset: Long = 0
     private var isRunning: Boolean = true
+    private val TAG : String = MainActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.tvRestart.setOnClickListener(this)
         binding.tvStart.setOnClickListener(this)
         binding.tvPause.setOnClickListener(this)
+
+        chronometer.setOnChronometerTickListener {
+            Log.i(TAG, "initialize: "+it.base)
+        }
     }
 
     override fun onClick(v: View?) {
